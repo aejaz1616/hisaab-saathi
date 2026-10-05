@@ -75,7 +75,7 @@ module.exports = async function handler(req, res) {
     const usage = data.usageMetadata || {};
 
     const { url, headers } = sb();
-    await fetch(`${url}/rest/v1/reminders`, {
+    const ins = await fetch(`${url}/rest/v1/reminders`, {
       method: "POST",
       headers: { ...headers, Prefer: "return=minimal" },
       body: JSON.stringify({
@@ -85,6 +85,7 @@ module.exports = async function handler(req, res) {
         output_tokens: usage.candidatesTokenCount ?? null,
       }),
     });
+    if (!ins.ok) throw new Error("Supabase insert failed: " + (await ins.text()));
 
     return res.status(200).json({ reply: output, stats: await getStats() });
   } catch (e) {
