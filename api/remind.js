@@ -1,7 +1,7 @@
 // api/remind.js  (Vercel serverless function, Node 18+)
 // POST -> drafts a reminder with Gemini, logs it to Supabase, returns reply + live stats
 // GET  -> returns live stats only (used by the page on load)
-const MODEL = "gemini-2.5-flash-lite";
+const MODEL = "gemini-3.5-flash-lite";
 const MAX_TOKENS = 200;   // output cap
 const CAP = 5;            // requests per visitor
 const SYSTEM_PROMPT = `You are the reminder writer inside Hisaab Saathi, a WhatsApp-first udhaar (store credit) assistant for Indian kirana stores, salons and small clinics. The shop owner gives you: shop type, language, amount due, days overdue, tone, and an optional short note. Write ONE WhatsApp payment reminder from the owner to a regular customer.
